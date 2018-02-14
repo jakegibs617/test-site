@@ -12,7 +12,6 @@ namespace League\OAuth2\Server\AuthorizationValidators;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\ValidationData;
-use League\OAuth2\Server\CryptKey;
 use League\OAuth2\Server\CryptTrait;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface;
@@ -28,26 +27,11 @@ class BearerTokenValidator implements AuthorizationValidatorInterface
     private $accessTokenRepository;
 
     /**
-     * @var \League\OAuth2\Server\CryptKey
-     */
-    protected $publicKey;
-
-    /**
      * @param AccessTokenRepositoryInterface $accessTokenRepository
      */
     public function __construct(AccessTokenRepositoryInterface $accessTokenRepository)
     {
         $this->accessTokenRepository = $accessTokenRepository;
-    }
-
-    /**
-     * Set the public key
-     *
-     * @param \League\OAuth2\Server\CryptKey $key
-     */
-    public function setPublicKey(CryptKey $key)
-    {
-        $this->publicKey = $key;
     }
 
     /**
